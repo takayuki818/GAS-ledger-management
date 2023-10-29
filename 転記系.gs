@@ -1,10 +1,15 @@
 function 台帳転記() {
-  let spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  let 転記設定シート = spreadsheet.getSheetByName("転記設定");
-  let 入力フォームシート = spreadsheet.getSheetByName("入力フォーム");
-  let 管理台帳シート = spreadsheet.getSheetByName("管理台帳");
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let 転記設定シート = ss.getSheetByName("転記設定");
+  let 入力フォームシート = ss.getSheetByName("入力フォーム");
+  let 管理台帳シート = ss.getSheetByName("管理台帳");
   // 転記設定シートからデータを取得
-  let 設定データ = 転記設定シート.getRange(2, 1, 転記設定シート.getLastRow() - 1, 2).getValues();
+  let 設定範囲 = 転記設定シート.getRange(2, 1, 転記設定シート.getLastRow() - 1, 2).getValues();
+  let 設定データ=[];
+  for(let i = 0;i<設定範囲.length;i++){
+    let j = 設定範囲[i][1];
+    設定データ[j] = 設定範囲[i][0];
+  }
   // 入力フォームシートから名前付き範囲のデータを取得
   let 名前付き範囲 = 入力フォームシート.getNamedRanges();
   let 名前データ = [];
@@ -18,7 +23,7 @@ function 台帳転記() {
   let 行データ = [];
   for (let i = 0; i < 設定データ.length; i++) {
     for (let j = 0; j < 名前データ.length; j++) {
-      if (設定データ[i][0] === 名前データ[j][0]) {
+      if (設定データ[i] === 名前データ[j][0]) {
         行データ.push(名前データ[j][1]);
       }
     }
