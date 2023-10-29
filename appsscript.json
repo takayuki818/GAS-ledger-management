@@ -1,0 +1,16 @@
+{
+  "timeZone": "Asia/Tokyo",
+  "dependencies": {
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "sheets": {
+    "macros": [{
+      "menuName": "myFunction",
+      "functionName": "myFunction"
+    }, {
+      "menuName": "台帳転記",
+      "functionName": "台帳転記"
+    }]
+  }
+}
